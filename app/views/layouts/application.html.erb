@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DatarumTest</title>
+    <link rel="icon" href="https://img.icons8.com/office/16/000000/goal--v1.png">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body>
+    <div class="flash-wrapper">
+      <%= render :partial => 'layouts/notice' %>
+    </div>
+    <div class="header">
+      <%= render 'layouts/header' %>
+    </div>
+    <div class="container mt-3 mb-5">
+      <%= yield %>
+    </div>
+  </body>
+</html>

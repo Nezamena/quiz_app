@@ -1,0 +1,23 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <p class="h5 text-white mb-0" href="#">
+      Datarum Test
+      <% if user_signed_in? %>
+        <button type="button" class="btn btn-sm btn-info ml-2">
+          Questions <span class="badge badge-light"><%= Question.count %></span>
+        </button>
+      <% end %>
+    </p>
+      <% if user_signed_in? %>
+        <div class="d-flex align-items-center">
+          <p class="text-white mb-0 mr-3 h5"><%= current_user.username %></p>
+          <%= button_to "Sign out", destroy_user_session_path, :method => :delete, class: "btn btn-sm btn-danger" %>
+        </div>
+      <% else %>
+        <div>
+          <%= link_to 'Sign in', new_user_session_path, class: " mr-2 btn btn-sm btn-primary" %>
+          <%= link_to 'Sign up', new_user_registration_path, class: "btn btn-sm btn-secondary"%>
+        </div>
+      <% end %>
+  </div>
+</nav>

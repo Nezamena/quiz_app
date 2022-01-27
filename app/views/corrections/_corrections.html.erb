@@ -1,0 +1,29 @@
+<div class="container" id="corHlSelected<%= corrections.id %>">
+  <div class="row align-items-baseline justify-content-between pl-3">
+    <div class="correction-status">
+    <span class="badge badge-secondary"><%= User.find(corrections.user_id).username %></span>
+      <% if corrections.allowence == false %>
+        <span class="badge badge-danger">Not Accepted</span>
+      <% else %>
+        <a href="#" data-correction="<%= corrections.id %>"><span class="badge badge-success">Accepted</span></a>
+      <% end %>
+    </div>
+    <small class="font-weight-light text-secondary"><%= time_ago_in_words(corrections.updated_at) %> ago</small>
+  </div>
+  <div class="mt-3 mb-3 ml-2 ow">
+    <%= corrections.body %>
+  </div>
+
+  <% current_user.answers.each do |accept_correction| %>
+   <% if accept_correction.id == corrections.answer_id && corrections.allowence == false %>
+      <button class="btn btn-sm btn-warning text-white mb-3 collapsed" type="button" data-toggle="collapse" data-target="#collapseAcceptCor<%= corrections.id %>" aria-expanded="false" aria-controls="collapseExample">
+        Accept Correction<i class="arrow"></i>
+      </button>
+      <%= link_to 'Cancel', corrections, :method => :delete, data: { confirm: 'Are you sure?' }, remote: true, class: "btn btn-sm btn-secondary mb-3" %>
+      <div class="collapse" id="collapseAcceptCor<%= corrections.id %>">
+        <%= render :partial => 'corrections/accept_corrections', :locals => { :correction => corrections } %>
+      </div>
+
+    <% end %>
+  <% end %>
+</div>
